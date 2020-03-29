@@ -107,7 +107,7 @@ const hostPage1 = (req, res) => {
     }
 
     // return success
-    return res.render('View all Cats', { cats: docs });
+    return res.render('page1', { cats: docs, title: "View all Cats" });
   };
 
   readAllCats(req, res, callback);
@@ -123,7 +123,7 @@ const hostPage2 = (req, res) => {
   // the file type in the app.js as jade. Calling res.render('index')
   // actually calls index.jade. A second parameter of JSON can be
   // passed into the jade to be used as variables with #{varName}
-  res.render('Add a Cat');
+  res.render('page2', {title: "Add a Cat"});
 };
 
 // function to handle requests to the page3 page
@@ -136,7 +136,7 @@ const hostPage3 = (req, res) => {
   // in the app.js as jade. Calling res.render('index')
   // actually calls index.jade. A second parameter of JSON can be passed
   // into the jade to be used as variables with #{varName}
-  res.render('Add a Dog');
+  res.render('page3', {title: "Add a Dog"});
 };
 
 const hostPage4 = (req, res) => {
@@ -148,7 +148,7 @@ const hostPage4 = (req, res) => {
     }
 
     // return success
-    return res.render('View all Dogs', { dogs: docs });
+    return res.render('page4', { dogs: docs, title: "Show all Dogs" });
   };
 
   readAllDogs(req, res, callback);
@@ -316,9 +316,10 @@ const searchDogName = (req, res) => {
     }
 
     // Add one to the age of the dog
-    doc.age++;
+    const dog = doc;
+    dog.age++;
 
-    const savePromise = doc.save();
+    const savePromise = dog.save();
 
     savePromise.catch((error) => res.status(500).json({ error }));
 
